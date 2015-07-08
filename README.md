@@ -1,2 +1,2 @@
 # cordova-jb-plugin-panframe
-Integrates panframe SDK with cordova:http://www.panframe.com/
+Integrates panframe SDK with cordova: http://www.panframe.com/
