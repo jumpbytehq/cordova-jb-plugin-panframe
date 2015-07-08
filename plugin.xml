@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="cordova-jb-plugin-panframe"
+      version="0.1.0">
+    <name>cordova-jb-plugin-panframe</name>
+    <description>cordova panframe plugin</description>
+
+    <js-module src="www/cdv-jb-panframe-plugin.js" name="ParsePlugin">
+        <clobbers target="panframePlugin" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="PanframePlugin">
+                <param name="android-package" value="com.jb.plugin.panframe" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+        </config-file>
+        <source-file src="src/android/libs/panframe-1.9.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/PanframePlugin.java" target-dir="src/com/jb/plugin/panframe" />
+     </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CDVPanframePlugin">
+                <param name="ios-package" value="CDVPanframePlugin" />
+            </feature>
+        </config-file>
+        <resource-file src="src/ios/frameworks/Settings.bundle" />
+        <header-file src="src/ios/CDVPanframePlugin.h" />
+        <source-file src="src/ios/CDVPanframePlugin.m" />
+
+        <framework src="UIKit.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreMotion.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="MobileCoreServices.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="Security.framework" />
+        <framework src="OpenGLES.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="src/ios/frameworks/Panframe.framework" custom="true" />
+    </platform>
+</plugin>
