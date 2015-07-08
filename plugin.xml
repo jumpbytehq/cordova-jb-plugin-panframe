@@ -6,7 +6,7 @@
     <name>cordova-jb-plugin-panframe</name>
     <description>cordova panframe plugin</description>
 
-    <js-module src="www/cdv-jb-panframe-plugin.js" name="ParsePlugin">
+    <js-module src="www/cdv-jb-panframe-plugin.js" name="PanframePlugin">
         <clobbers target="panframePlugin" />
     </js-module>
 
@@ -17,10 +17,10 @@
                 <param name="android-package" value="com.jb.plugin.panframe" />
             </feature>
         </config-file>
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <!-- <config-file target="AndroidManifest.xml" parent="/manifest/application">
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
-        </config-file>
+        </config-file> -->
         <source-file src="src/android/libs/panframe-1.9.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/PanframePlugin.java" target-dir="src/com/jb/plugin/panframe" />
      </platform>
@@ -28,7 +28,7 @@
     <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="CDVPanframePlugin">
+            <feature name="PanframePlugin">
                 <param name="ios-package" value="CDVPanframePlugin" />
             </feature>
         </config-file>
@@ -36,7 +36,7 @@
         <header-file src="src/ios/CDVPanframePlugin.h" />
         <source-file src="src/ios/CDVPanframePlugin.m" />
 
-        <framework src="UIKit.framework" />
+      <!--   <framework src="UIKit.framework" />
         <framework src="AVFoundation.framework" />
         <framework src="CoreMedia.framework" />
         <framework src="CoreGraphics.framework" />
@@ -47,7 +47,7 @@
         <framework src="QuartzCore.framework" />
         <framework src="Security.framework" />
         <framework src="OpenGLES.framework" />
-        <framework src="SystemConfiguration.framework" />
+        <framework src="SystemConfiguration.framework" /> -->
         <framework src="src/ios/frameworks/Panframe.framework" custom="true" />
     </platform>
 </plugin>

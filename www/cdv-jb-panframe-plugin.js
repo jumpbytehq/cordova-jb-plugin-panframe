@@ -14,10 +14,11 @@ var panframePlugin = {
         exec(
             successCallback,
             errorCallback,
-            'panframePlugin',
+            'PanframePlugin',
             'init',
             [videoUrl, viewMode]
         );
-    };
+    }
+};
 
 module.exports = panframePlugin;
