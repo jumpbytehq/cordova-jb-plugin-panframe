@@ -24,11 +24,24 @@
 #import <objc/message.h>
 
 @implementation CDVPanframePlugin
-
+/*
+    params:
+    #1: video url
+    #2: view mode:  0 for spherical,
+                    1 for flat,
+                    2 for cylindrical,
+                    3 for side-by-side VR (non-stereoscopic),
+                    4 for top-down VR formatted content (stereoscopic).
+*/
 - (void)init:(CDVInvokedUrlCommand*)command
 {
     self.pluginCallbackId = command.callbackId;
     NSLog(@"player plugin init method called");
+
+    NSString *videoUrl = [command.arguments objectAtIndex:0];
+    NSString *viewMode = [command.arguments objectAtIndex:1];
+    //[Parse setApplicationId:appId clientKey:clientKey];
+
     Class vcClass = NSClassFromString(@"SimplePlayerViewController");
     id vc = [[vcClass alloc]  initWithNibName:nil bundle:nil];
     UINavigationController * nc = [[UINavigationController alloc]initWithRootViewController:vc];
@@ -39,6 +52,10 @@
                                                  name:@"didDismissPlayerController"
                                                object:nil];
     [self.viewController presentViewController:nc animated:YES completion:nil];
+
+    CDVPluginResult* pluginResult = nil;
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 -(void)didDismissPlayerController {
