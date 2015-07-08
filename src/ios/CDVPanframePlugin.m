@@ -6,9 +6,7 @@
  to you under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance
  with the License.  You may obtain a copy of the License at
-
  http://www.apache.org/licenses/LICENSE-2.0
-
  Unless required by applicable law or agreed to in writing,
  software distributed under the License is distributed on an
  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -21,44 +19,32 @@
 #include <sys/sysctl.h>
 
 #import <Cordova/CDV.h>
-#import "CDVVuforia.h"
+#import "CDVPanframePlugin.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
 
-@implementation CDVVuforia
-
-@synthesize pluginCallbackId;
-
+@implementation CDVPanframePlugin
 
 - (void)init:(CDVInvokedUrlCommand*)command
 {
     self.pluginCallbackId = command.callbackId;
-    
-    NSLog(@"vuforia plugin init method");
-    Class vcClass = NSClassFromString(@"FrameMarkersViewController");
+    NSLog(@"player plugin init method called");
+    Class vcClass = NSClassFromString(@"SimplePlayerViewController");
     id vc = [[vcClass alloc]  initWithNibName:nil bundle:nil];
-    
     UINavigationController * nc = [[UINavigationController alloc]initWithRootViewController:vc];
    // [vc release];
     nc.navigationBar.barStyle = UIBarStyleDefault;
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didDismissVuforiaController)
-                                                 name:@"didDismissVuforiaController"
+                                             selector:@selector(didDismissPlayerController)
+                                                 name:@"didDismissPlayerController"
                                                object:nil];
-    
     [self.viewController presentViewController:nc animated:YES completion:nil];
-
-    //[nc release];
-   // [self.viewController presentViewController:vc animated:nil completion:nil animated:YES];
 }
 
--(void)didDismissVuforiaController {
-    NSString * scantarget = [[NSUserDefaults standardUserDefaults] objectForKey:@"scantarget"];
-    NSLog(@"Dismissed vuforia controller %@", scantarget);
+-(void)didDismissPlayerController {
+    NSLog(@"Dismissed player controller %@", "test");
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    if(scantarget != nil){
-        [self sendOKMessage:scantarget];
-    }else{
-        [self sendErrorMessage];
-    }
+    [self sendOKMessage:@"test"];
 }
 
 -(void) sendOKMessage:(NSString*)scantarget
