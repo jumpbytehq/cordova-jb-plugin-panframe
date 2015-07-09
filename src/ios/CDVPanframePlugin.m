@@ -63,10 +63,10 @@
         [vc initParams:videoUrl mode:viewMode.intValue];
         UINavigationController * nc = [[UINavigationController alloc]initWithRootViewController:vc];
         nc.navigationBar.barStyle = UIBarStyleDefault;
-        [[NSNotificationCenter defaultCenter] addObserver:self
+       /* [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didDismissPlayerController)
                                                      name:@"didDismissPlayerController"
-                                                   object:nil];
+                                                   object:nil];*/
         [self.viewController presentViewController:nc animated:YES completion:nil];
 
     } else {
@@ -81,9 +81,9 @@
 }
 
 -(void)didDismissPlayerController {
-    NSLog(@"Dismissed player controller");
+    /*NSLog(@"Dismissed player controller");
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [self sendOKMessage:@"test"];
+    [self sendOKMessage:@"test"];*/
 }
 
 -(void) sendOKMessage:(NSString*)scantarget
