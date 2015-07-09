@@ -3,7 +3,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
            id="cordova-jb-plugin-panframe"
       version="0.1.0">
-    <name>cordova-jb-plugin-panframe</name>
+    <name>Panframe</name>
     <description>cordova panframe plugin</description>
 
     <js-module src="www/cdv-jb-panframe-plugin.js" name="PanframePlugin">
