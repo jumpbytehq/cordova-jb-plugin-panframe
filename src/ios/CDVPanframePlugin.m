@@ -24,6 +24,9 @@
 #import <objc/message.h>
 #import "SimplePlayerViewController.h"
 
+#define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
+
+
 @implementation CDVPanframePlugin
 /*
     params:
@@ -41,6 +44,17 @@
 
     NSString *videoUrl = [command.arguments objectAtIndex:0];
     NSString *viewMode = [command.arguments objectAtIndex:1];
+
+    if([allTrim( videoUrl ) length] == 0) {
+        NSLog(@"video url empty!");
+        [self sendErrorMessage:@"error: video url is empty!"];
+        return;
+    } else if ([allTrim(viewMode) length] == 0) {
+        NSLog(@"view mode empty!");
+        [self sendErrorMessage:@"error: view mode is empty!"];
+        return;
+    }
+
     //[Parse setApplicationId:appId clientKey:clientKey];
     Class vcClass = NSClassFromString(@"SimplePlayerViewController");
     if (vcClass) {
@@ -59,6 +73,7 @@
     }
     //id vc = [[vcClass alloc] initWithNibName:nil bundle:nil];
 
+
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
@@ -76,9 +91,9 @@
     [self.commandDelegate sendPluginResult:result callbackId: self.pluginCallbackId];
 }
 
--(void) sendErrorMessage
+-(void) sendErrorMessage:(NSString*)error
 {
-    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@""];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error];
     [self.commandDelegate sendPluginResult:result callbackId: self.pluginCallbackId];
 }
 
