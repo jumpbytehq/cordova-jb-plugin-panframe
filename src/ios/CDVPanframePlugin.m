@@ -26,7 +26,6 @@
 
 #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]
 
-
 @implementation CDVPanframePlugin
 /*
     params:
@@ -44,12 +43,12 @@
 
     NSString *videoUrl = [command.arguments objectAtIndex:0];
     NSString *viewMode = [command.arguments objectAtIndex:1];
-
-    if([allTrim( videoUrl ) length] == 0) {
+    
+    if(videoUrl.length == 0 || [allTrim( videoUrl ) length] == 0) {
         NSLog(@"video url empty!");
         [self sendErrorMessage:@"error: video url is empty!"];
         return;
-    } else if ([allTrim(viewMode) length] == 0) {
+    } else if (viewMode == nil) {
         NSLog(@"view mode empty!");
         [self sendErrorMessage:@"error: view mode is empty!"];
         return;
