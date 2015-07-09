@@ -22,6 +22,7 @@
 #import "CDVPanframePlugin.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
+#import "SimplePlayerViewController.h"
 
 @implementation CDVPanframePlugin
 /*
@@ -41,17 +42,22 @@
     NSString *videoUrl = [command.arguments objectAtIndex:0];
     NSString *viewMode = [command.arguments objectAtIndex:1];
     //[Parse setApplicationId:appId clientKey:clientKey];
-
     Class vcClass = NSClassFromString(@"SimplePlayerViewController");
-    id vc = [[vcClass alloc]  initWithNibName:nil bundle:nil];
-    UINavigationController * nc = [[UINavigationController alloc]initWithRootViewController:vc];
-   // [vc release];
-    nc.navigationBar.barStyle = UIBarStyleDefault;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didDismissPlayerController)
-                                                 name:@"didDismissPlayerController"
-                                               object:nil];
-    [self.viewController presentViewController:nc animated:YES completion:nil];
+    if (vcClass) {
+        NSLog(@"player plugin videoUrl: %@, viewMode: %@", videoUrl, viewMode);
+
+        SimplePlayerViewController *vc = [[vcClass alloc] initWithNibName:nil bundle:nil];
+        [vc initParams:videoUrl mode:viewMode.intValue];
+        UINavigationController * nc = [[UINavigationController alloc]initWithRootViewController:vc];
+        nc.navigationBar.barStyle = UIBarStyleDefault;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didDismissPlayerController)
+                                                     name:@"didDismissPlayerController"
+                                                   object:nil];
+        [self.viewController presentViewController:nc animated:YES completion:nil];
+
+    }
+    //id vc = [[vcClass alloc] initWithNibName:nil bundle:nil];
 
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -59,7 +65,7 @@
 }
 
 -(void)didDismissPlayerController {
-    NSLog(@"Dismissed player controller %@", "test");
+    NSLog(@"Dismissed player controller");
     [[NSNotificationCenter defaultCenter] removeObserver: self];
     [self sendOKMessage:@"test"];
 }
