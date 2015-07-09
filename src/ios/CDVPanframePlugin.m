@@ -59,8 +59,8 @@
     Class vcClass = NSClassFromString(@"SimplePlayerViewController");
     if (vcClass) {
         NSLog(@"player plugin videoUrl: %@, viewMode: %@", videoUrl, viewMode);
-
-        SimplePlayerViewController *vc = [[vcClass alloc] initWithNibName:nil bundle:nil];
+        UIStoryboard *MainStoryboard = [UIStoryboard storyboardWithName:@"PlayerStoryboard" bundle: nil];
+        SimplePlayerViewController *vc = [MainStoryboard instantiateViewControllerWithIdentifier:@"SimplePlayerViewController"];
         [vc initParams:videoUrl mode:viewMode.intValue];
         UINavigationController * nc = [[UINavigationController alloc]initWithRootViewController:vc];
         nc.navigationBar.barStyle = UIBarStyleDefault;
@@ -70,9 +70,11 @@
                                                    object:nil];
         [self.viewController presentViewController:nc animated:YES completion:nil];
 
+    } else {
+        NSLog(@"player view controller class does not exists");
+        [self sendErrorMessage:@"error: player view controller class does not exists"];
+        return;
     }
-    //id vc = [[vcClass alloc] initWithNibName:nil bundle:nil];
-
 
     CDVPluginResult* pluginResult = nil;
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
