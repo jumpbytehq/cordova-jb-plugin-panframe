@@ -18,7 +18,7 @@ Although the object is in the global scope, it is not available until after the 
 - Android
 - iOS
 
-### Parammeters
+### Parameters
 	videoUrl: Your videUrl - supports RTMP, and HTTP Live Streaming (HLS) e.g. - [Ultra light flight](http://mobile.360heros.com/producers/4630608605686575/9813601418398322/video/video_31b451b7ca49710719b19d22e19d9e60.mp4)
 	viewMode:
 		#iOS
