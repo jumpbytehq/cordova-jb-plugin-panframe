@@ -4,7 +4,7 @@
 		id="cordova-jb-plugin-panframe"
 		version="0.1.0">
 
-	<name>cordova-jb-plugin-panframe</name>
+	<name>Panframe</name>
 
 	<description>Cordova PanFrame(http://www.panframe.com/) Plugin</description>
 
@@ -16,12 +16,12 @@
 	<platform name="android">
 		<!-- Play Services... -->
 		<dependency id="cordova-plugin-android-support-v4" />
-		
+
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
 
 			<!-- Activity Entries -->
 			<activity android:name="com.jb.plugin.panframe.SimpleStreamPlayerActivity" android:screenOrientation="landscape" android:launchMode="singleInstance" />
-			
+
 			<!-- Permissions -->
 			<uses-permission android:name="android.permission.INTERNET" />
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -57,21 +57,26 @@
 		<resource-file src="src/ios/frameworks/Settings.bundle" />
 		<header-file src="src/ios/CDVPanframePlugin.h" />
 		<source-file src="src/ios/CDVPanframePlugin.m" />
+		<header-file src="src/ios/SimplePlayerViewController.h" />
+		<source-file src="src/ios/SimplePlayerViewController.m" />
+		<!-- res files -->
+		<resource-file src="src/ios/PlayerStoryboard.storyboard" />
 
-		<!-- Dependencies 
-			<framework src="UIKit.framework" />
-			<framework src="AVFoundation.framework" />
-			<framework src="CoreMedia.framework" />
-			<framework src="CoreGraphics.framework" />
-			<framework src="CoreLocation.framework" />
-			<framework src="CoreMotion.framework" />
-			<framework src="Foundation.framework" />
-			<framework src="MobileCoreServices.framework" />
-			<framework src="QuartzCore.framework" />
-			<framework src="Security.framework" />
-			<framework src="OpenGLES.framework" />
-			<framework src="SystemConfiguration.framework" />
-		-->
+		<!-- Dependencies -->
+		<framework src="UIKit.framework" />
+		<framework src="AVFoundation.framework" />
+		<framework src="CoreMedia.framework" />
+		<framework src="CoreGraphics.framework" />
+		<framework src="CoreLocation.framework" />
+		<framework src="CoreMotion.framework" />
+		<framework src="CoreVideo.framework" />
+		<framework src="AssetsLibrary.framework" />
+		<framework src="Foundation.framework" />
+		<framework src="MobileCoreServices.framework" />
+		<framework src="QuartzCore.framework" />
+		<framework src="Security.framework" />
+		<framework src="OpenGLES.framework" />
+		<framework src="SystemConfiguration.framework" />
 		<framework src="src/ios/frameworks/Panframe.framework" custom="true" />
 	</platform>
 </plugin>
