@@ -25,7 +25,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 
-import com.jb.panframe.R; // Change this to your appropriate Resource Class of Project @TODO @DEV @JB
+// import com.jb.panframe.R; // IF REQUIRED - Change this to your appropriate Resource Class of Project @TODO @DEV @JB 
 import com.panframe.android.lib.PFAsset;
 import com.panframe.android.lib.PFAssetObserver;
 import com.panframe.android.lib.PFAssetStatus;
@@ -68,20 +68,23 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		appResources = getResources();
+		packageName = getApplication().getPackageName();
+
 		videoUrl = getIntent().getStringExtra("videoUrl");
 		viewMode = getIntent().getIntExtra("viewMode", 2);
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.simple_stream_player);
+		setContentView(appResources.getIdentifier("simple_stream_player", "layout", packageName));
 
-		_frameContainer = (ViewGroup) findViewById(R.id.framecontainer);
+		_frameContainer = (ViewGroup) findViewById(appResources.getIdentifier("framecontainer", "id", packageName));
 		_frameContainer.setBackgroundColor(0xFF000000);
 
-		_playButton = (Button) findViewById(R.id.playbutton);
-		_stopButton = (Button) findViewById(R.id.stopbutton);
-		_touchButton = (Button) findViewById(R.id.touchbutton);
-		_scrubber = (SeekBar) findViewById(R.id.scrubber);
+		_playButton = (Button) findViewById(appResources.getIdentifier("playbutton", "id", packageName));
+        _stopButton = (Button) findViewById(appResources.getIdentifier("stopbutton", "id", packageName));
+        _touchButton = (Button) findViewById(appResources.getIdentifier("touchbutton", "id", packageName));
+        _scrubber = (SeekBar) findViewById(appResources.getIdentifier("scrubber", "id", packageName));
 
 		_playButton.setOnClickListener(playListener);
 		_stopButton.setOnClickListener(stopListener);
@@ -245,7 +248,7 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
 	private OnClickListener touchListener = new OnClickListener() {
 		public void onClick(View v) {
 			if (_pfview != null) {
-				Button touchButton = (Button) findViewById(R.id.touchbutton);
+				Button touchButton = (Button) findViewById(appResources.getIdentifier("touchbutton", "id", packageName));
 				if (_currentNavigationMode == PFNavigationMode.TOUCH) {
 					_currentNavigationMode = PFNavigationMode.MOTION;
 					touchButton.setText("motion");
@@ -257,16 +260,6 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
 			}
 		}
 	};
-
-// /**
-//  * Setup the options menu
-//  *
-//  * @param menu The options menu
-//  */
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.activity_main, menu);
-//        return true;
-//    }
 
 	/**
 	 * Called when pausing the app.
@@ -317,10 +310,10 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
 		_updateThumb = true;
 	}
 
-    @Override
-    public void onBackPressed() {
-        _pfasset.stop();
-        super.onBackPressed();
-        this.finish();
-    }
+	@Override
+	public void onBackPressed() {
+		_pfasset.stop();
+		super.onBackPressed();
+		this.finish();
+	}
 }
