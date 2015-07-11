@@ -25,7 +25,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 
-// import com.jb.panframe.R; // IF REQUIRED - Change this to your appropriate Resource Class of Project @TODO @DEV @JB 
 import com.panframe.android.lib.PFAsset;
 import com.panframe.android.lib.PFAssetObserver;
 import com.panframe.android.lib.PFAssetStatus;
@@ -39,6 +38,9 @@ import java.util.TimerTask;
 public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAssetObserver, SeekBar.OnSeekBarChangeListener {
 
 	public static final String TAG = "SimpleStream";
+    Resources appResources;
+    String packageName;
+
 	private ProgressDialog progressDialog;
 
 	PFView _pfview;
