@@ -12,6 +12,7 @@
 
 package com.jb.plugin.panframe;
 
+import android.content.res.Resources;
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
