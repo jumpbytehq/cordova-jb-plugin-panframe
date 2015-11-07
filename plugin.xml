@@ -15,20 +15,22 @@
 	<!-- android -->
 	<platform name="android">
 		<!-- Play Services... -->
-		<dependency id="cordova-plugin-android-support-v4" />
+		<!-- <dependency id="cordova-plugin-android-support-v4" /> -->
 
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
 
 			<!-- Activity Entries -->
-			<activity android:name="com.jb.plugin.panframe.SimpleStreamPlayerActivity" android:screenOrientation="landscape" android:launchMode="singleInstance" />
+			<activity android:name="com.jb.plugin.panframe.SimpleStreamPlayerActivity" android:screenOrientation="landscape" />
+		</config-file>
 
+		<config-file target="AndroidManifest.xml" parent="/*">
 			<!-- Permissions -->
 			<uses-permission android:name="android.permission.INTERNET" />
 			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 		</config-file>
 
-		<!--  -->
+		<!-- PanframePlugin JS -->
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="PanframePlugin">
 				<param name="android-package" value="com.jb.plugin.panframe.PanframePlugin" />

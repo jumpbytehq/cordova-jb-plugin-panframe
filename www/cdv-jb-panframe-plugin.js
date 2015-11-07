@@ -16,13 +16,13 @@ var panframePlugin = {
 	    				2 for stereo side-by-side
 	*/
 
-    init: function(videoUrl, viewMode, successCallback, errorCallback) {
+    init: function(videoUrl, viewMode, aspectRatio, successCallback, errorCallback) {
         exec(
             successCallback,
             errorCallback,
             'PanframePlugin',
             'init',
-            [videoUrl, viewMode]
+            [videoUrl, viewMode, aspectRatio]
         );
     }
 };
