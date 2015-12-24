@@ -360,7 +360,8 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
      * @param seekbar The SeekBar in which the touch gesture began
      */
     public void onStopTrackingTouch(SeekBar seekbar) {
-        _updateThumb = true;
+        _pfasset.setPLaybackTime(seekbar.getProgress());
+        _updateThumb = false;
     }
 
     @Override
