@@ -117,7 +117,7 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
         _touchButton.setVisibility(visibility);
         vogglzButton.setVisibility(visibility);
         _scrubber.setVisibility(visibility);
-        if(viewMode != 2) {
+        if(viewMode <= 2) {
             _touchButton.setVisibility(View.GONE);
             vogglzButton.setVisibility(View.GONE);
         }
