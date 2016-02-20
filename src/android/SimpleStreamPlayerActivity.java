@@ -25,7 +25,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 
-import com.cappital.digitalfood.R;
 import com.panframe.android.lib.PFAsset;
 import com.panframe.android.lib.PFAssetObserver;
 import com.panframe.android.lib.PFAssetStatus;
