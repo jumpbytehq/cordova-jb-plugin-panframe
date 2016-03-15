@@ -2,17 +2,17 @@
  * SimpleStreamPlayer
  * Android example of Panframe library
  * The example plays back an panoramic movie from a resource.
- * 
+ *
  * (c) 2012-2013 Mindlight. All rights reserved.
- * Visit www.panframe.com for more information. 
- * 
+ * Visit www.panframe.com for more information.
+ *
  * MODIFIED BY JUMPBYTE
- * 
  */
 
 package com.jb.plugin.panframe;
 
 import android.app.ProgressDialog;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -65,22 +65,24 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
      *
      * @param savedInstanceState a saved instance of the Bundle
      */
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String packageName = getPackageName();
+        Resources resources = getResources();
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.simple_stream_player);
+        setContentView(resources.getIdentifier("simple_stream_player", "layout", packageName));
 
-        _frameContainer = (ViewGroup) findViewById(R.id.framecontainer);
+        _frameContainer = (ViewGroup) findViewById(resources.getIdentifier("framecontainer", "id", packageName));
         _frameContainer.setBackgroundColor(0xFF000000);
 
-        _playButton = (Button) findViewById(R.id.playbutton);
-        _stopButton = (Button) findViewById(R.id.stopbutton);
-        _touchButton = (Button) findViewById(R.id.touchbutton);
-        vogglzButton = (Button) findViewById(R.id.vogglzButton);
-        _scrubber = (SeekBar) findViewById(R.id.scrubber);
+        _playButton = (Button) findViewById(resources.getIdentifier("playbutton", "id", packageName));
+        _stopButton = (Button) findViewById(resources.getIdentifier("stopbutton", "id", packageName));
+        _touchButton = (Button) findViewById(resources.getIdentifier("touchbutton", "id", packageName));
+        vogglzButton = (Button) findViewById(resources.getIdentifier("vogglzButton", "id", packageName));
+        _scrubber = (SeekBar) findViewById(resources.getIdentifier("scrubber", "id", packageName));
 
         _playButton.setOnClickListener(playListener);
         _stopButton.setOnClickListener(stopListener);
@@ -290,7 +292,7 @@ public class SimpleStreamPlayerActivity extends FragmentActivity implements PFAs
     private OnClickListener touchListener = new OnClickListener() {
         public void onClick(View v) {
             if (_pfview != null) {
-                Button touchButton = (Button) findViewById(R.id.touchbutton);
+                Button touchButton = (Button) findViewById(getResources().getIdentifier("touchbutton", "id", getPackageName()));
                 if (_currentNavigationMode == PFNavigationMode.TOUCH) {
                     _currentNavigationMode = PFNavigationMode.MOTION;
                     touchButton.setText("motion");
