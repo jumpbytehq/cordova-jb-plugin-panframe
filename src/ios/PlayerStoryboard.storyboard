@@ -14,12 +14,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view alpha="0.85000002384185791" contentMode="scaleToFill" id="95y-KY-Jte">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" id="4cQ-Le-WtR">
+                                <rect key="frame" x="15" y="484" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </activityIndicatorView>
+                            <view alpha="0.59999999999999987" contentMode="scaleToFill" id="95y-KY-Jte">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="1jQ-sg-ofL">
-                                        <rect key="frame" x="149" y="14" width="94" height="23"/>
+                                        <rect key="frame" x="152" y="14" width="92" height="23"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <connections>
                                             <action selector="sliderChanged:" destination="2" eventType="valueChanged" id="DR0-Ap-Jpk"/>
@@ -28,81 +32,71 @@
                                             <action selector="sliderUp:" destination="2" eventType="touchUpOutside" id="cmL-uZ-13t"/>
                                         </connections>
                                     </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jew-J2-ddA">
+                                        <rect key="frame" x="8" y="5" width="65" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Play">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playButton:" destination="2" eventType="touchUpInside" id="x3j-R4-cnG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jQI-Jj-nQ1">
+                                        <rect key="frame" x="250" y="5" width="64" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBack:" destination="2" eventType="touchUpInside" id="ODh-rf-fgN"/>
+                                            <action selector="normalButton:" destination="2" eventType="touchUpOutside" id="xXZ-UL-6cd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="FDY-Dn-R6q">
+                                        <rect key="frame" x="81" y="5" width="65" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Vogglz">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleViewMode:" destination="2" eventType="touchUpInside" id="dKG-E5-Is1"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jew-J2-ddA">
-                                <rect key="frame" x="2" y="523" width="65" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="play">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="hiliteButton:" destination="2" eventType="touchDown" id="bQW-Ze-q1Y"/>
-                                    <action selector="normalButton:" destination="2" eventType="touchUpOutside" id="P3T-qF-Peq"/>
-                                    <action selector="playButton:" destination="2" eventType="touchUpInside" id="x3j-R4-cnG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wmx-az-Dls">
-                                <rect key="frame" x="73" y="523" width="65" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="stop">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="hiliteButton:" destination="2" eventType="touchDown" id="y0Q-7c-fzl"/>
-                                    <action selector="normalButton:" destination="2" eventType="touchUpOutside" id="CgO-Qf-OLD"/>
-                                    <action selector="stopButton:" destination="2" eventType="touchUpInside" id="PCU-dG-yXW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jQI-Jj-nQ1">
-                                <rect key="frame" x="252" y="523" width="65" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="motion">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="hiliteButton:" destination="2" eventType="touchDown" id="nP2-H3-L2W"/>
-                                    <action selector="normalButton:" destination="2" eventType="touchUpOutside" id="xXZ-UL-6cd"/>
-                                    <action selector="toggleNavigation:" destination="2" eventType="touchUpInside" id="XKt-ll-zEZ"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" id="4cQ-Le-WtR">
-                                <rect key="frame" x="15" y="484" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="navbutton" destination="jQI-Jj-nQ1" id="cNL-yb-Bze"/>
+                        <outlet property="backButton" destination="jQI-Jj-nQ1" id="ua5-2K-sWf"/>
                         <outlet property="playbutton" destination="jew-J2-ddA" id="XC4-wi-pE0"/>
                         <outlet property="seekindicator" destination="4cQ-Le-WtR" id="YEb-2U-Ysk"/>
                         <outlet property="slider" destination="1jQ-sg-ofL" id="Qxh-3N-goa"/>
-                        <outlet property="stopbutton" destination="wmx-az-Dls" id="sxC-72-Um2"/>
+                        <outlet property="toggleViewButton" destination="FDY-Dn-R6q" id="cmL-DZ-L2k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="251" y="291"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

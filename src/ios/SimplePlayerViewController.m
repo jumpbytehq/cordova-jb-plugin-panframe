@@ -16,20 +16,18 @@
     id<PFAsset> pfAsset;
     enum PFNAVIGATIONMODE currentmode;
     bool touchslider;
+    bool autoplay;
     NSTimer *slidertimer;
     int currentview;
     NSString *videoURL;
     int viewMode;
     
     IBOutlet UIButton *playbutton;
-    IBOutlet UIButton *stopbutton;
-    IBOutlet UIButton *navbutton;
     IBOutlet UIButton *viewbutton;
     IBOutlet UISlider *slider;
-    
+    __weak IBOutlet UIButton *toggleViewButton;
     IBOutlet UIActivityIndicatorView *seekindicator;
-    
-    UIImage *pauseImage;
+    __weak IBOutlet UIButton *backButton;
 }
 
 - (void) onStatusMessage : (PFAsset *) asset message:(enum PFASSETMESSAGE) m;
@@ -50,12 +48,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelVR)];
-    self.title = @"VR Player";
+    // hide navigation bar
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelVR)];
+    //self.title = @"VR Player";
     slider.value = 0;
     slider.enabled = false;
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self
                action:@selector(aMethod:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -72,14 +72,16 @@
     seekindicator.hidden = TRUE;
     
     currentmode = PF_NAVIGATION_MOTION;
-    currentview = 0;
-    [self normalButton:viewbutton];
-    [self normalButton:navbutton];
-    [self normalButton:playbutton];
-    [self normalButton:stopbutton];
+    currentview = viewMode;
     
-    pauseImage = [UIImage imageNamed:@"pausescreen.png"];
-    
+    if(currentview == 0) {
+        [toggleViewButton setTitle:@"Vogglz" forState:UIControlStateNormal];
+    } else {
+        [toggleViewButton setTitle:@"Sphere" forState:UIControlStateNormal];
+    }
+    if(autoplay) {
+        [playbutton sendActionsForControlEvents: UIControlEventTouchUpInside];
+    }
 }
 
 // added for custom back
@@ -205,7 +207,6 @@
     
     // start rendering the view
     [pfView run];
-
 }
 
 
@@ -260,12 +261,12 @@
             CMTime t = [asset getDuration];
             slider.maximumValue = CMTimeGetSeconds(t);
             slider.minimumValue = 0.0;
-            [playbutton setTitle:@"pause" forState:UIControlStateNormal];
+            [playbutton setTitle:@"Pause" forState:UIControlStateNormal];
             slider.enabled = true;
             break;
         case PF_ASSET_PAUSED:
             NSLog(@"Paused");
-            [playbutton setTitle:@"play" forState:UIControlStateNormal];
+            [playbutton setTitle:@"Play" forState:UIControlStateNormal];
             break;
         case PF_ASSET_COMPLETE:
             NSLog(@"Complete");
@@ -285,6 +286,8 @@
 
 - (void) stop
 {
+    // reEnable the Idle Timer
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     // stop the view
     [pfView halt];
     
@@ -292,7 +295,36 @@
     [self deleteAsset];
     [self deleteView];
     
-    [playbutton setTitle:@"play" forState:UIControlStateNormal];
+    [playbutton setTitle:@"Play" forState:UIControlStateNormal];
+}
+
+- (void) play
+{
+    // reEnable the Idle Timer
+    [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    // create a Panframe view
+    [self createView];
+    NSLog(@"setting view mode to --- %d", viewMode);
+    [pfView setViewMode:viewMode andAspect:16/9];
+    
+    // create some hotspots
+    //[self createHotspots];
+    
+    
+    // create a Panframe asset
+    [self createAssetWithUrl:[NSURL URLWithString:videoURL]];
+    
+    // [self createAssetWithUrl:[NSURL URLWithString:@"http://199.217.117.12/demi_1920_960.mp4"]];
+    //[self createAssetWithUrl:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"PANO1" ofType:@"m4v"]]];
+    
+    if ([pfAsset getStatus] == PF_ASSET_ERROR)
+        [self stop];
+    else
+        [pfAsset play];
+    
+}
+- (IBAction)goBack:(id)sender {
+    [self cancelVR];
 }
 
 - (IBAction) stopButton:(id) sender
@@ -311,53 +343,35 @@
     
     if (pfAsset != nil)
     {
+        NSLog(@"calling pause");
         [pfAsset pause];
-        [pfView injectImage:pauseImage];
-        return;
+    } else {
+        [self play];
+        NSLog(@"playing now.");
     }
-    
-    // create a Panframe view
-    [self createView];
-    NSLog(@"setting view mode to --- %d", viewMode);
-    [pfView setViewMode:viewMode andAspect:16/9];
-
-    // create some hotspots
-    //[self createHotspots];
-    
-    
-    // create a Panframe asset
-    [self createAssetWithUrl:[NSURL URLWithString:videoURL]];
-    
-   // [self createAssetWithUrl:[NSURL URLWithString:@"http://199.217.117.12/demi_1920_960.mp4"]];
-    //[self createAssetWithUrl:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"PANO1" ofType:@"m4v"]]];
-    
-    if ([pfAsset getStatus] == PF_ASSET_ERROR)
-        [self stop];
-    else
-        [pfAsset play];
 }
 
-- (IBAction) toggleNavigation:(id) sender
-{
-    // change navigation mode
-    
+- (IBAction)toggleViewMode:(id)sender {
     if (pfView != nil)
     {
-        if (currentmode == PF_NAVIGATION_MOTION)
+        if (currentview == 0)
         {
-            currentmode = PF_NAVIGATION_TOUCH;
-            [navbutton setTitle:@"touch" forState:UIControlStateNormal];
+            currentview = 3;
+            [toggleViewButton setTitle:@"Sphere" forState:UIControlStateNormal];
         }
         else
         {
-            currentmode = PF_NAVIGATION_MOTION;
-            [navbutton setTitle:@"motion" forState:UIControlStateNormal];
+            currentview = 0;
+            [toggleViewButton setTitle:@"Vogglz" forState:UIControlStateNormal];
         }
-        [pfView setNavigationMode:currentmode];
+        toggleViewButton.opaque = true;
+        [pfView setViewMode:currentview andAspect:2.0/1.0];
     }
     
-    [self normalButton:navbutton];
+    [self normalButton:toggleViewButton];
+
 }
+
 
 - (IBAction) toggleView:(id) sender
 {
@@ -381,14 +395,18 @@
 
 - (IBAction) hiliteButton:(id) sender
 {
-    UIButton *b = (UIButton *) sender;
-    b.backgroundColor = [UIColor colorWithRed:53.0/255.0 green:72.0/255.0 blue:160.0/255.0 alpha:1.0];
+//    UIButton *b = (UIButton *) sender;
+//    b.backgroundColor = [UIColor colorWithRed:53.0/255.0 green:72.0/255.0 blue:160.0/255.0 alpha:1.0];
 }
 
 - (IBAction) normalButton:(id) sender
 {
-    UIButton *b = (UIButton *) sender;
-    b.backgroundColor = [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:127.0/255.0 alpha:1.0];
+//    UIButton *b = (UIButton *) sender;
+//    [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [b setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    CALayer *layer = b.layer;
+//    layer.cornerRadius = 2.0f;
+//    layer.backgroundColor = [[[UIColor darkGrayColor] colorWithAlphaComponent:0] CGColor];
 }
 
 - (IBAction) sliderChanged:(id) sender
@@ -410,6 +428,7 @@
 - (void) initParams:(NSString*)url mode:(int)mode {
     videoURL = url;
     viewMode = mode;
+    autoplay = true;
     [pfView setViewMode:mode andAspect:16.0/9.0];
     NSLog(@"view mode has been set to mode: %d & video url set to: %@", viewMode, videoURL);
 }
