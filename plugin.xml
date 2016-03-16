@@ -15,7 +15,7 @@
 	<!-- android -->
 	<platform name="android">
 		<!-- Play Services... -->
-		<!-- <dependency id="cordova-plugin-android-support-v4" /> -->
+		<dependency id="cordova-plugin-android-support-v4" />
 
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
 
