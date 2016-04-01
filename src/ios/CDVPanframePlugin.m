@@ -22,6 +22,7 @@
 #import "CDVPanframePlugin.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
+#import <AVFoundation/AVAudioSession.h>
 #import "SimplePlayerViewController.h"
 
 #define allTrim( object ) [object stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet] ]

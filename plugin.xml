@@ -78,6 +78,7 @@
 		<framework src="QuartzCore.framework" />
 		<framework src="Security.framework" />
 		<framework src="OpenGLES.framework" />
+		<framework src="AVFoundation.Frameworks" />
 		<framework src="SystemConfiguration.framework" />
 		<framework src="src/ios/frameworks/Panframe.framework" custom="true" />
 	</platform>
