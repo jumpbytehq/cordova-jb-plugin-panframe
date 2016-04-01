@@ -38,6 +38,13 @@
 */
 - (void)init:(CDVInvokedUrlCommand*)command
 {
+    // TO Allow Playing Sound in the Credits: http://stackoverflow.com/a/16061703/934565
+    NSError *setCategoryErr = nil;
+    NSError *activationErr  = nil;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryErr];
+    [[AVAudioSession sharedInstance] setActive:YES error:&activationErr];
+    
+    // Continue With Plugin Functionality
     self.pluginCallbackId = command.callbackId;
     NSLog(@"player plugin init method called");
 
