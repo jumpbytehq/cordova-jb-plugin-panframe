@@ -12,6 +12,21 @@
 
 #import <CoreMedia/CoreMedia.h>
 
+enum PFASSETMESSAGE {
+    PF_ASSET_LOADED = 1,
+    PF_ASSET_PLAYING   = 2,
+    PF_ASSET_PAUSED = 3,
+    PF_ASSET_STOPPED = 4,
+    PF_ASSET_COMPLETE = 5,
+    PF_ASSET_DOWNLOADING = 6,           // depricated
+    PF_ASSET_DOWNLOADED = 7,            // depricated
+    PF_ASSET_DOWNLOADCANCELLED = 8,     // depricated
+    PF_ASSET_ERROR = 9,
+    PF_ASSET_SEEKING = 10,
+    PF_ASSET_BUFFER_EMPTY = 11,
+    PF_ASSET_BUFFER_FULL = 12,
+    PF_ASSET_BUFFER_KEEPING_UP = 13
+};
 @protocol PFAsset;
 
 /** A protocol for monitoring the progress of the playback of an asset */

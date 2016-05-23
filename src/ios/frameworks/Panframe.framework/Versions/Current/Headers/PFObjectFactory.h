@@ -12,7 +12,7 @@
 
 @class PFView;
 @class PFAssetObserver;
-
+class PFSoundEngine;
 
 /** The PFObjectFactory can instantiate appropriate PFAsset instances and PFView instances  */
 @interface PFObjectFactory : NSObject
@@ -27,4 +27,7 @@
          @return A PFView instance conforming to the frame requested.
      */
     + (PFView *) viewWithFrame:(CGRect)frame;
+
+    + (PFSoundEngine *) PFCreateSoundEngine;
+
 @end

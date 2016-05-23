@@ -77,6 +77,11 @@ enum PFBLINDSPOTLOCATION {
  */
 - (void) animate;
 
+/** Hotspot state
+ */
+- (int) getState;
+
+
 @end
 
 /** An PFView is responsable for rendering the contents of PFAsset instances.*/
@@ -174,6 +179,11 @@ enum PFBLINDSPOTLOCATION {
  */
 - (id) createHotspot:(UIImage *)image;
 
+/** Create a hotspot in the scene using an UIImage
+ @param view The UIView to be used as hotspot image
+ */
+- (id) createHotspotWithView:(UIView *)view;
+
 /** Remove a hotspot from the scene
  @param hotspot The hotspot to be removed
  */
@@ -189,6 +199,11 @@ enum PFBLINDSPOTLOCATION {
  @param bStereo Flag to indicate splitscreen stereo view display
  */
 - (void) setStereo:(BOOL)bStereo;
+
+/** Enable hitting of hotspots on focus (center)
+ @param bfocus Set true for hit on focus, false to interact only with touch.
+ */
+- (void) setHitOnFocus:(BOOL)bfocus;
 
 @end
 
